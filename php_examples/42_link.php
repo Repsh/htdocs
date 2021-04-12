@@ -1,6 +1,6 @@
 <?php 
 include "head.php";
-$page = 'foru_in_line';
+$page = '42_link';
 
 include "DataManager.php";
 $manager = new DataManager('42_data.json');
@@ -32,20 +32,48 @@ $manager = new DataManager('42_data.json');
     }
     else {
         $amount = $manager->get('amount', 0);
-        if ($amount == '') {
-            $amount = 42;
+    }
+    if ($amount == '') {
+        $amount = 42;
+    }
+
+    if (array_key_exists('next', $_GET)) {
+        $amount++;
+    }
+    if (array_key_exists('-', $_GET)) {
+        $amount--;
+    }
+    
+    $manager->save('amount', 0, $amount);
+
+    $output = '';
+    if (array_key_exists('id', $_GET)) {
+        $id = (int) $_GET['id'];
+
+        if ($id % 3 === 0) {
+            $output .= "ID: " . $id;
+
+            $link_value = $manager->get('links', $id);
+
+            if ($link_value === '') {
+                $link_value = $id;
+            }
+            $manager->save('links', $id, ++$link_value );
+
         }
     }
-    $manager->save('amount', 0, $amount);
-    print($i);
 
-    for ($i = 1; $i <= $amount; $i++){
-        if ($i % 6 === 0) {
-            echo "<a href='?id=$i' class='btn btn-danger'> $i </a>";
+    for ($i = 1; $i <= $amount; $i++) {
+        $value = $manager->get('links', $i);
+        if ($value === '') {
+            $value = $i;
         }
-        else {
-            echo "<a href='?id=$i' class='btn btn-dark'> $i  </a>";
-        }
-    }  
+        $class_name = ($i % 6 === 0) ? 'btn-danger' : 'btn-dark';
+        echo "<a href='?id=$i' class='btn $class_name'>$value</a>";
+    }
     ?>
+
+    <a href="?next" class="btn btn-success">+</a>
+    <a href="?-" class="btn btn-success">-</a>
+    <?php  echo $output; ?>
 </div>

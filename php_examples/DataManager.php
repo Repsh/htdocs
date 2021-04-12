@@ -1,6 +1,9 @@
 <?php
 class DataManager
 {
+    /*
+     * Mainīgais kas satur visas datubāzes tabulu divdimensionālā masīvā
+     */
     private $table = [];
     private $file_name = 'db.json';
 
@@ -16,12 +19,27 @@ class DataManager
         }
     }
 
+
+    /*
+     * Saglabā vērtību iekš datubāzes ar atslēgām $r un $c 
+     * @param int $r - pirmā atslēga
+     * @param int $c - otrā atslēga
+     * @param mixed $value - vērtība kas tiks saglabāta datubāzē
+     */
     public function save($r, $c, $value)
     {
         $this->table[$r][$c] = $value;
         $content = json_encode($this->table, JSON_PRETTY_PRINT);
         file_put_contents($this->file_name, $content);
     }
+
+    /*  
+     * Atgriež vērtību no datubāzes kas atbilst atslēgām $r un $c 
+     * @param(parameter) int(integer) $r
+     * @param int $c 
+     *
+     * @return mixed vērtība no datubāzes || tukšu stringu.
+     */
 
     public function get($r, $c)
     {
@@ -32,6 +50,9 @@ class DataManager
         return '';
     }
 
+    /*
+     * @return int 
+     */
     public function count()
     {
         $count = 0;
