@@ -1,0 +1,22 @@
+.container {
+    width: 550px; 
+    margin: 120px auto;
+    align-content: center;
+ }
+ 
+ .container form {
+     display: flex;
+     background: rgb(147, 220, 39);
+     padding: 20px;
+ 
+     flex-direction: column;
+     
+ }
+ 
+ .container button {
+     margin-top: 25px;
+     tab-size: auto;
+     background: rgb(152, 151, 151);
+ }
+
+ 

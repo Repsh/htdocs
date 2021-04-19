@@ -1,0 +1,17 @@
+.container {
+   width: 550px; 
+   margin: 120px auto;
+}
+
+.container form {
+    display: flex;
+    background: rgb(243, 24, 24);
+    padding: 20px;
+
+    flex-direction: column;
+    
+}
+
+.container button {
+    margin-top: 25px;
+}
