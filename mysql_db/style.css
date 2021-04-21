@@ -1,6 +1,11 @@
+body {
+  background: rgb(82, 82, 82);
+}
+
 .container {
    width: 550px; 
    margin: 120px auto;
+   
 }
 
 .container form {
@@ -14,4 +19,10 @@
 
 .container button {
     margin-top: 25px;
+}
+
+td,
+th {
+  padding: 20px;
+  border: 5px solid black;
 }
